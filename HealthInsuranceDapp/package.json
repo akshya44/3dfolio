@@ -1,0 +1,33 @@
+{
+  "name": "blockchain-health-insurance",
+  "version": "1.0.0",
+  "description": "Decentralized Health Insurance DApp built on Ethereum blockchain",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy.js --network ganache",
+    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "clean": "npx hardhat clean"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "health-insurance",
+    "dapp",
+    "smart-contract",
+    "solidity",
+    "hardhat",
+    "metamask"
+  ],
+  "author": "Health Insurance DApp Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "ethers": "^6.9.0"
+  }
+}

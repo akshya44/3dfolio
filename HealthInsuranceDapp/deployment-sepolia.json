@@ -1,0 +1,9 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "contractAddress": "0x360d8841AD3BB4c8a10BB6DD55e10d78194c4047",
+  "insurerAddress": "0x19bb719c0CACBC3BA502D9eA0Ce015CF53430357",
+  "deployedAt": "2026-01-06T18:46:49.674Z",
+  "contractBalance": "0.0",
+  "explorerUrl": "https://sepolia.etherscan.io/address/0x360d8841AD3BB4c8a10BB6DD55e10d78194c4047"
+}

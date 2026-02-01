@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Decentralized Health Insurance Platform on Blockchain">
+    <title>HealthChain | Decentralized Insurance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">⚕️</div><span class="brand-text">HealthChain</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-section="dashboard">Dashboard</a>
+                <a href="#" class="nav-link" data-section="policies">Policies</a>
+                <a href="#" class="nav-link" data-section="claims">Claims</a>
+                <a href="#" class="nav-link admin-only" data-section="admin">Admin</a>
+            </div>
+            <div class="nav-actions">
+                <div class="network-badge" id="networkBadge"><span class="network-dot"></span><span
+                        class="network-name">Not Connected</span></div>
+                <button class="btn btn-gradient" id="connectWallet"><span id="walletBtnText">Connect
+                        Wallet</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section id="dashboard" class="section active">
+            <div class="hero">
+                <h1 class="hero-title"><span class="gradient-text">Decentralized</span> Health Insurance</h1>
+                <p class="hero-subtitle">Secure, transparent, and instant claims processing powered by blockchain.</p>
+                <div class="stats-grid">
+                    <div class="stat-card glass">
+                        <div class="stat-icon blue">📋</div><span class="stat-value" id="totalPolicies">0</span><span
+                            class="stat-label">Active Policies</span>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon green">✅</div><span class="stat-value" id="approvedClaims">0</span><span
+                            class="stat-label">Approved Claims</span>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon orange">⏳</div><span class="stat-value" id="pendingClaims">0</span><span
+                            class="stat-label">Pending Claims</span>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon gold">💰</div><span class="stat-value" id="contractBalance">0
+                            ETH</span><span class="stat-label">Contract Balance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="policies" class="section">
+            <h2 class="section-title">Insurance <span class="gradient-text">Plans</span></h2>
+            <div class="plans-grid">
+                <div class="plan-card glass">
+                    <div class="plan-badge">Basic</div>
+                    <div class="plan-price"><span class="price-value">0.01</span><span class="price-unit">ETH/yr</span>
+                    </div>
+                    <div class="plan-coverage">Coverage: <strong>1 ETH</strong></div><button
+                        class="btn btn-outline btn-block" onclick="createPolicy(0)">Select</button>
+                </div>
+                <div class="plan-card glass featured">
+                    <div class="plan-badge popular">Standard</div>
+                    <div class="plan-price"><span class="price-value">0.05</span><span class="price-unit">ETH/yr</span>
+                    </div>
+                    <div class="plan-coverage">Coverage: <strong>5 ETH</strong></div><button
+                        class="btn btn-gradient btn-block" onclick="createPolicy(1)">Select</button>
+                </div>
+                <div class="plan-card glass">
+                    <div class="plan-badge premium">Premium</div>
+                    <div class="plan-price"><span class="price-value">0.1</span><span class="price-unit">ETH/yr</span>
+                    </div>
+                    <div class="plan-coverage">Coverage: <strong>10 ETH</strong></div><button
+                        class="btn btn-outline btn-block" onclick="createPolicy(2)">Select</button>
+                </div>
+                <div class="plan-card glass">
+                    <div class="plan-badge enterprise">Enterprise</div>
+                    <div class="plan-price"><span class="price-value">0.5</span><span class="price-unit">ETH/yr</span>
+                    </div>
+                    <div class="plan-coverage">Coverage: <strong>50 ETH</strong></div><button
+                        class="btn btn-outline btn-block" onclick="createPolicy(3)">Select</button>
+                </div>
+            </div>
+            <h3 class="subsection-title">My Policies</h3>
+            <div id="myPolicies" class="cards-container">
+                <div class="empty-state glass">No policies found.</div>
+            </div>
+        </section>
+
+        <section id="claims" class="section">
+            <h2 class="section-title">Submit <span class="gradient-text">Claims</span></h2>
+            <div class="form-container glass">
+                <form id="claimForm">
+                    <div class="form-row">
+                        <div class="form-group"><label>Policy ID</label><select id="claimPolicyId" required>
+                                <option value="">Select policy</option>
+                            </select></div>
+                        <div class="form-group"><label>Amount (ETH)</label><input type="number" id="claimAmount"
+                                step="0.001" min="0.001" required></div>
+                    </div>
+                    <div class="form-group"><label>Medical Provider</label><input type="text" id="medicalProvider"
+                            required></div>
+                    <div class="form-group"><label>Description</label><textarea id="claimDescription" rows="3"
+                            required></textarea></div>
+                    <button type="submit" class="btn btn-gradient btn-lg">Submit Claim</button>
+                </form>
+            </div>
+            <h3 class="subsection-title">My Claims</h3>
+            <div id="myClaims" class="cards-container">
+                <div class="empty-state glass">No claims submitted.</div>
+            </div>
+        </section>
+
+        <section id="admin" class="section admin-only">
+            <h2 class="section-title">Admin <span class="gradient-text">Panel</span></h2>
+            <div class="admin-actions glass">
+                <button class="btn btn-outline" onclick="showModal('depositModal')">💵 Deposit Funds</button>
+                <button class="btn btn-outline" onclick="showModal('withdrawModal')">💸 Withdraw Funds</button>
+            </div>
+            <h3 class="subsection-title">Pending Claims</h3>
+            <div id="adminPendingClaims" class="cards-container">
+                <div class="empty-state glass">No pending claims.</div>
+            </div>
+            <h3 class="subsection-title">Approved Claims (Pay)</h3>
+            <div id="adminApprovedClaims" class="cards-container">
+                <div class="empty-state glass">No approved claims.</div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="policyModal">
+        <div class="modal glass">
+            <div class="modal-header">
+                <h3>Create Policy</h3><button class="modal-close" onclick="closeModal('policyModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="policyForm">
+                    <div class="form-group"><label>Your Name</label><input type="text" id="holderName" required></div>
+                    <div class="plan-info"><span id="modalPlanType"></span> - <span id="modalPlanPremium"></span></div>
+                    <input type="hidden" id="selectedPlan"><button type="submit"
+                        class="btn btn-gradient btn-block">Confirm & Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal glass">
+            <div class="modal-header">
+                <h3>Deposit Funds</h3><button class="modal-close" onclick="closeModal('depositModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="depositForm">
+                    <div class="form-group"><label>Amount (ETH)</label><input type="number" id="depositAmount"
+                            step="0.1" min="0.1" required></div><button type="submit"
+                        class="btn btn-gradient btn-block">Deposit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal glass">
+            <div class="modal-header">
+                <h3>Withdraw Funds</h3><button class="modal-close"
+                    onclick="closeModal('withdrawModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="withdrawForm">
+                    <div class="form-group"><label>Amount (ETH)</label><input type="number" id="withdrawAmount"
+                            step="0.1" min="0.1" required></div><button type="submit"
+                        class="btn btn-gradient btn-block">Withdraw</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="rejectModal">
+        <div class="modal glass">
+            <div class="modal-header">
+                <h3>Reject Claim</h3><button class="modal-close" onclick="closeModal('rejectModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="rejectForm">
+                    <div class="form-group"><label>Reason</label><textarea id="rejectReason" rows="3"
+                            required></textarea></div><input type="hidden" id="rejectClaimId"><button type="submit"
+                        class="btn btn-danger btn-block">Reject</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <div id="loader" class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
